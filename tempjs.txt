@@ -1,0 +1,120 @@
+// script.js
+
+const darkModeBtn = document.getElementById('dark-mode-btn');
+const moonIcon = document.getElementById('moon-icon');
+const header = document.querySelector('header');
+const navLinks = document.querySelectorAll('.nav-link');
+const logo = document.querySelector('.logo img'); // get the logo image element
+const searchBar = document.getElementById('search-bar');
+const searchBtn = document.querySelector('.search-btn'); // get the search button element
+const mealBtns = document.querySelectorAll('.meal-btn');
+const tabIndicator = document.querySelector('.tab-indicator');
+const sparkleBtn = document.getElementById('sparkle-btn');
+const imageContainer = document.getElementById('image-container');
+
+// Updated image paths (relative paths for web use)
+const images = {
+    'breakfast': [
+        { url: './ACTUALIMAGES/images.jpg', name: 'Breakfast 1' },
+        { url: './ACTUALIMAGES/images (3).jpg', name: 'Breakfast 2' },
+        { url: './ACTUALIMAGES/images.jpg', name: 'Breakfast 1' },
+        { url: './ACTUALIMAGES/images (3).jpg', name: 'Breakfast 2' },
+        { url: './ACTUALIMAGES/images.jpg', name: 'Breakfast 1' },
+        { url: './ACTUALIMAGES/images (3).jpg', name: 'Breakfast 2' },
+        { url: './ACTUALIMAGES/images.jpg', name: 'Breakfast 1' },
+        { url: './ACTUALIMAGES/images (3).jpg', name: 'Breakfast 2' }
+    ],
+    'lunch': [
+        { url: './assets/images/lunch1.jpg', name: 'Lunch 1' },
+        { url: './assets/images/lunch2.jpg', name: 'Lunch 2' }
+    ],
+    'dinner': [
+        { url: './assets/images/dinner1.jpg', name: 'Dinner 1' },
+        { url: './assets/images/dinner2.jpg', name: 'Dinner 2' }
+    ],
+    'snack': [
+        { url: './assets/images/snack1.jpg', name: 'Snack 1' },
+        { url: './assets/images/snack2.jpg', name: 'Snack 2' }
+    ],
+    'teatime': [
+        { url: './assets/images/teatime1.jpg', name: 'Teatime 1' },
+        { url: './assets/images/teatime2.jpg', name: 'Teatime 2' }
+    ]
+};
+
+// Toggle Dark Mode
+darkModeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    header.classList.toggle('dark-mode');
+    navLinks.forEach(navLink => navLink.classList.toggle('dark-mode'));
+    darkModeBtn.classList.toggle('active');
+
+    // Change logo based on dark mode
+    if (document.body.classList.contains('dark-mode')) {
+        logo.src = './assets/images/logo-dark.png';
+    } else {
+        logo.src = './assets/images/logo-light.png';
+    }
+});
+
+sparkleBtn.addEventListener('click', () => {
+    alert('Sparkle button clicked!');
+});
+
+
+// Search functionality placeholder
+searchBar.addEventListener('input', (e) => {
+    const searchQuery = e.target.value.trim();
+    console.log(`Search query: ${searchQuery}`);
+});
+
+searchBtn.addEventListener('click', () => {
+    const searchQuery = searchBar.value.trim();
+    console.log(`Searching for: ${searchQuery}`);
+});
+
+// Meal button functionality
+mealBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        // Remove selected class from all buttons
+        mealBtns.forEach((btn) => btn.classList.remove('selected'));
+        // Add selected class to the clicked button
+        btn.classList.add('selected');
+
+        // Move the tab indicator under the selected button
+        const btnRect = btn.getBoundingClientRect();
+        tabIndicator.style.left = `${btnRect.left}px`;
+        tabIndicator.style.width = `${btnRect.width}px`;
+
+        // Get images based on the clicked button's data-tab
+        const mealType = btn.getAttribute('data-tab');
+        const imageUrls = images[mealType];
+
+        // Clear previous images
+        imageContainer.innerHTML = '';
+
+        // Create a new image row
+        const imageRow = document.createElement('div');
+        imageRow.classList.add('image-row');
+        imageContainer.appendChild(imageRow);
+
+        // Add images to the row
+        imageUrls.forEach((image) => {
+            const imageContainerDiv = document.createElement('div');
+            imageContainerDiv.classList.add('image-container');
+            imageRow.appendChild(imageContainerDiv);
+
+            const imageElement = document.createElement('img');
+            imageElement.src = image.url;
+            imageContainerDiv.appendChild(imageElement);
+
+            const imageName = document.createElement('div');
+            imageName.classList.add('image-name');
+            imageName.textContent = image.name;
+            imageContainerDiv.appendChild(imageName);
+        });
+
+        // Show the image container
+        imageContainer.classList.remove('hidden');
+    });
+});

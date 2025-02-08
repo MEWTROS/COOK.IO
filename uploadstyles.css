@@ -1,0 +1,160 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background */
+    color: #333; /* Dark text */
+}
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+header {
+    background-color: #f0f0f0;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease; /* add transition effect */
+}
+
+.logo {
+    margin-right: 20px;
+}
+
+.logo img {
+    width: 160px;
+    height: 40px; /* changed height to make it a rectangle */
+    object-fit: contain;
+    border-radius: 5px; /* removed border-radius: 50% to make it a rectangle */
+}
+
+nav ul {
+    list-style: none;
+    margin-left: 80px;
+    padding-left: 0px;
+    display: flex;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s ease;
+    font-family: 'Pacifico'; /* added a nice, cursive font that matches the cooking theme */
+    font-size: 25px;
+    margin-right: 20px;
+}
+
+.nav-link:hover {
+    color: #666;
+}
+
+.nav-link.dark-mode {
+    color: #fff;
+}
+
+.nav-link.dark-mode:hover {
+    color: #ccc;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.dark-mode-btn, .add-recipe-btn, .login-btn {
+    background-color: #FF9900; /* light orange theme */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin: 10px;
+}
+
+
+.dark-mode-btn:hover, .add-recipe-btn:hover,.login-btn:hover {
+    background-color: #fc713a; /* darker orange theme */
+}
+
+.dark-mode-btn {
+    margin-right: 10px;
+    background-color: #444; /* darker background color */
+    border-radius: 50%; /* make the button circular */
+    padding: 10px 15px; /* adjust padding to fit the circular shape */
+    width: 50px; /* Set width */
+    height: 50px;
+    transition: background-color 0.2s ease, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode-btn:hover {
+    background-color: #555; /* even darker background color on hover */
+}
+
+.dark-mode-btn:focus {
+    outline: none;
+}
+
+#moon-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease-in-out; /* add transition effect */
+}
+
+.dark-mode-btn:hover #moon-icon {
+    transform: scale(1.1); /* scale up on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode-btn.active #moon-icon {
+    transform: rotate(40deg); /* rotate when dark mode is active */
+}
+
+/* add this to style the dark mode */
+.dark-mode {
+    /* add your dark mode styles here */
+    background-color: #333; /* example dark mode background color */
+    color: #fff; /* example dark mode text color */
+}
+
+
+
+
+.upload-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff; /* White background for the upload container */
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#image-upload {
+    margin: 20px 0;
+}
+
+#submit-btn {
+    background-color: #FF9900; /* Light orange */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#submit-btn:hover {
+    background-color: #fc713a; /* Darker orange on hover */
+}
+
+#recipe-output {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none; /* Hide output by default */
+}

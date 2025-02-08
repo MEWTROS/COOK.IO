@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Animated Login Form</title>
+	<link rel="stylesheet" href="signupstyle.css">
+	<script>
+		function checkUsername() {
+			const usernameInput = document.getElementById("username");
+			const username = usernameInput.value;
+			const xhr = new XMLHttpRequest();
+			xhr.open("POST", "checkuser.php", true);
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					const message = document.getElementById("message");
+		
+					if (xhr.responseText === "available") {
+						lala.textContent = "Username";
+						message.style.color = "green";
+						usernameInput.style.setProperty("color", "black", "important"); // Change text color to black
+					} else {
+						lala.textContent = "Username already exists";
+						message.style.color = "red";
+						usernameInput.style.setProperty("color", "red", "important"); // Change text color to red
+					}
+				}
+			};
+			xhr.send("username=" + encodeURIComponent(username));
+		}
+		</script>
+</head>
+<body>
+	<div class="box">
+		<!-- Updated form to post data to login.php -->
+		<form action="signup.php" method="post" autocomplete="off">
+			<h2>Sign up</h2>
+            <div class="inputBox">
+				<!-- Added name attribute for PHP to process the input -->
+				<input type="text" name="email" required="required">
+				<span>Email</span>
+				<i></i>
+			</div>
+			<div class="inputBox">
+				<!-- Added name attribute for PHP to process the input -->
+				<input type="text" name="username" id="username" onkeyup="checkUsername()" required>
+				<span id="lala">Username</span>
+				<i></i>
+				<div id="message"></div>
+               
+				
+			</div>
+			<div class="inputBox">
+				<!-- Added name attribute for PHP to process the input -->
+				<input type="password" name="password" required="required">
+				<span>Password</span>
+				<i></i>
+			</div>
+			<div class="links">
+				<a href="#"></a>
+				<a href="login.html">Sign in</a>
+			</div>
+			<div class="container1">
+				<!-- Submit button for the form -->
+				<input type="submit" value="Register" class="login-button">
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+// script.js
+
+const darkModeBtn = document.getElementById('dark-mode-btn');
+const moonIcon = document.getElementById('moon-icon');
+const header = document.querySelector('header');
+const navLinks = document.querySelectorAll('.nav-link');
+const logo = document.querySelector('.logo img'); // get the logo image element
+const searchBar = document.getElementById('search-bar');
+const searchBtn = document.querySelector('.search-btn'); // get the search button element
+const mealBtns = document.querySelectorAll('.meal-btn');
+const tabIndicator = document.querySelector('.tab-indicator');
+const images = {
+    'breakfast': [
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images (3).jpg', name: 'Breakfast 1' },
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images.jpg', name: 'Breakfast 2' },
+        // Add more images as needed
+    ],
+    'lunch': [
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images (3).jpg', name: 'Lunch 1' },
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images.jpg', name: 'Lunch 2' },
+        // Add more images as needed
+    ],
+    'dinner': [
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images (3).jpg', name: 'Dinner 1' },
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images.jpg', name: 'Dinner 2' },
+        // Add more images as needed
+    ],
+    'snacks': [
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images (3).jpg', name: 'Snacks 1' },
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images.jpg', name: 'Snacks 2' },
+        // Add more images as needed
+    ],
+    'drinks': [
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images (3).jpg', name: 'Drinks 1' },
+        { url: 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\ACTUALIMAGES\\images.jpg', name: 'Drinks 2' },
+        // Add more images as needed
+    ],
+};
+const imageContainer = document.getElementById('image-container');
+const buttons = document.querySelectorAll('.meal-btn');
+
+
+darkModeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    header.classList.toggle('dark-mode'); // toggle dark mode on header
+    navLinks.forEach(navLink => navLink.classList.toggle('dark-mode')); // toggle dark mode on nav links
+    darkModeBtn.classList.toggle('active'); // add active class to button
+    if (document.body.classList.contains('dark-mode')) {
+        logo.src = 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\logo-dark.png';
+    } else {
+        logo.src = 'C:\\Users\\crazy\\Desktop\\WEB PROJECT\\logo-light.png';
+    }
+});
+
+searchBar.addEventListener('input', (e) => {
+    const searchQuery = e.target.value.trim();
+    console.log(`Search query: ${searchQuery}`);
+    // Add more functionality here to handle the search query
+});
+
+searchBtn.addEventListener('click', () => {
+    const searchQuery = searchBar.value.trim();
+    console.log(`Searching for: ${searchQuery}`);
+    // Add your search logic here
+});
+
+mealBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+        mealBtns.forEach((btn) => btn.classList.remove('selected'));
+        btn.classList.add('selected');
+        const btnRect = btn.getBoundingClientRect();
+        tabIndicator.style.left = `${btnRect.left}px`;
+        tabIndicator.style.width = `${btnRect.width}px`;
+    });
+});
+
+
+
+
+  
+  // Add event listeners to the buttons
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const buttonId = button.id; // Use the button ID to get images
+        const imageUrls = images[buttonId];
+
+        imageContainer.innerHTML = ''; // Clear previous images
+
+        // Create an image row
+        const imageRow = document.createElement('div');
+        imageRow.classList.add('image-row');
+        imageContainer.appendChild(imageRow);
+
+        // Populate images
+        imageUrls.forEach((image) => {
+            const imageContainerDiv = document.createElement('div');
+            imageContainerDiv.classList.add('image-container');
+            imageRow.appendChild(imageContainerDiv);
+
+            const imageElement = document.createElement('img');
+            imageElement.src = image.url;
+            imageContainerDiv.appendChild(imageElement);
+
+            const imageName = document.createElement('div');
+            imageName.classList.add('image-name');
+            imageName.textContent = image.name;
+            imageContainerDiv.appendChild(imageName);
+        });
+
+        imageContainer.classList.remove('hidden'); // Show the image container
+    });
+});
